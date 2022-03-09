@@ -19,7 +19,7 @@ public class ItemDetailsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = FragmentItemDetailsBinding.inflate(getLayoutInflater());
+        binding = FragmentItemDetailsBinding.inflate(inflater);
         return binding.getRoot();
     }
 
@@ -39,5 +39,11 @@ public class ItemDetailsFragment extends Fragment {
             binding.itemPrice.setText(getArguments().getString(HomeFragment.ITEM_PRICE, ""));
         }
 
+    }
+
+    public static ItemDetailsFragment newInstance(Bundle bundle) {
+        ItemDetailsFragment itemDetailsFragment = new ItemDetailsFragment();
+        itemDetailsFragment.setArguments(bundle);
+        return itemDetailsFragment;
     }
 }

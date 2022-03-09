@@ -2,6 +2,7 @@ package com.end.nond
 
 import android.content.Context
 import com.end.nond.cache.ImageCache
+import com.end.nond.extensions.createDefaultCache
 import okhttp3.OkHttpClient
 
 object Nond {
@@ -21,14 +22,15 @@ object Nond {
         val imageLoader =
             ImageLoader.Builder()
                 .setContext(context)
-                .setOkHttpClient(buildDefaultCallFactory())
+                .setOkHttpClient(buildDefaultCallFactory(context))
                 .build()
         this.imageLoader = imageLoader
         imageLoader
     }
 
-    private fun buildDefaultCallFactory() = let {
+    private fun buildDefaultCallFactory(context: Context) = let {
         OkHttpClient.Builder()
+            .cache(createDefaultCache(context))
             .build()
     }
 }

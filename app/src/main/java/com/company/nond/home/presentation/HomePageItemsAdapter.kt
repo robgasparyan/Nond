@@ -27,9 +27,9 @@ class HomePageItemsAdapter(private val onItemClicked: ((itemName:String, itemPri
 
         fun bind(item: HomePageItemsUIModel) = with(binding) {
             itemContainer.setOnClickListener {
-                onItemClicked.invoke(item.name, item.price, item.image_urls?.get(0)?:"")
+                onItemClicked.invoke(item.name, item.price, item.image_urls_thumbnails?.get(0)?:"")
             }
-            item.image_urls?.let {
+            item.image_urls_thumbnails?.let {
                 itemImage.loadImage(it[0])
             }
             itemName.text = item.name

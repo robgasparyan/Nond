@@ -21,6 +21,9 @@ class CoreImageLoader(
 
     override fun enqueue(request: ImageRequest) {
         scope.launch {
+            withContext(Dispatchers.Main) {
+                request.imageView?.setImageDrawable(null)
+            }
             val imageCache = request.imageCache
             val url = checkNotNull(request.url) { "Null response body!" }
             if (imageCache?.hasItem(url) == true) {
@@ -42,10 +45,10 @@ class CoreImageLoader(
                 }
                 val body = checkNotNull(response.body) { "Null response body!" }
                 val bitmap = BitmapFactory.decodeStream(body.byteStream())
-                imageCache?.put(request.url, bitmap)
                 withContext(Dispatchers.Main) {
                     setBitmapToImageView(request.imageView, bitmap)
                 }
+                imageCache?.put(request.url, bitmap)
             }
         }
     }

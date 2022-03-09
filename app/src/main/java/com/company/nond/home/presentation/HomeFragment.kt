@@ -1,7 +1,6 @@
 package com.company.nond.home.presentation
 
 import androidx.core.os.bundleOf
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.company.nond.BaseFragment
 import com.company.nond.R
@@ -55,10 +54,11 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     }
 
     private fun onItemClicked(itemName: String, itemPrice: String, imageUrl: String) {
-        findNavController().navigate(
-            R.id.action_homeFragment_to_itemDetailsFragment,
+        val itemBundle =
             bundleOf(ITEM_NAME to itemName, ITEM_PRICE to itemPrice, IMAGE_URL to imageUrl)
-        )
+        requireActivity().supportFragmentManager.beginTransaction()
+            .add(R.id.fragment_container, ItemDetailsFragment.newInstance(itemBundle))
+            .addToBackStack(null).commit()
     }
 
     companion object {

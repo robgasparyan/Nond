@@ -7,6 +7,8 @@ import com.end.nond.ImageLoader
 import com.end.nond.ImageRequest
 import com.end.nond.Nond
 import com.end.nond.cache.ImageCache
+import okhttp3.Cache
+import java.lang.ref.WeakReference
 
 internal fun MimeTypeMap.getMimeTypeFromUrl(url: String?): String? {
     if (url.isNullOrBlank()) {

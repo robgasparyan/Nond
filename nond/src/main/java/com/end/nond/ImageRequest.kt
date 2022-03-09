@@ -5,6 +5,7 @@ import android.widget.ImageView
 import com.end.nond.cache.ImageCache
 import com.end.nond.logger.DebugLogger
 import com.end.nond.logger.Logger
+import java.lang.ref.WeakReference
 
 class ImageRequest private constructor(
     val context: Context,

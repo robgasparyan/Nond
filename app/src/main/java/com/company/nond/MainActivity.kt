@@ -1,9 +1,9 @@
 package com.company.nond
 
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.company.nond.databinding.ActivityMainBinding
+import com.company.nond.home.presentation.HomeFragment
 import com.company.nond.utils.binding.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -15,18 +15,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportFragmentManager.beginTransaction().add(R.id.fragment_container, HomeFragment())
+            .addToBackStack(null).commit()
     }
 
     fun showLoading() = binding.progress.show()
 
     fun hideLoading() = binding.progress.hide()
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
-            onBackPressed()
-            return true
-        }
-        return super.onOptionsItemSelected(item)
-    }
 }
