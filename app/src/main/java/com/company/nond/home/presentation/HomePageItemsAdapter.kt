@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.company.nond.databinding.ItemHomePageBinding
 import com.company.nond.home.domain.HomePageItemsUIModel
+import com.end.nond.extensions.loadImage
 
 class HomePageItemsAdapter:RecyclerView.Adapter<HomePageItemsAdapter.ViewHolder>() {
 
@@ -22,23 +23,22 @@ class HomePageItemsAdapter:RecyclerView.Adapter<HomePageItemsAdapter.ViewHolder>
         holder.bind(getItem(position) ?: return)
     }
 
-    inner class ViewHolder(val binding: ItemHomePageBinding) :
+    inner class ViewHolder(private val binding: ItemHomePageBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         init {
             binding.itemContainer.setOnClickListener {
                 onItemClicked?.invoke()
             }
-
         }
 
         fun bind(item: HomePageItemsUIModel) = with(binding) {
-            val context = itemName.context
-//            itemImage.loadImage("https://i.guim.co.uk/img/media/2a46ce0b584eaa648360df4f028309cae1f66573/0_338_7360_4417/master/7360.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=b706cbd0907bc2de5b8664d97975eb92")
+            item.image_urls?.let {
+                itemImage.loadImage(it[0])
+            }
             itemName.text = item.name
             itemPrice.text = item.price
         }
-
     }
 
     @SuppressLint("NotifyDataSetChanged")

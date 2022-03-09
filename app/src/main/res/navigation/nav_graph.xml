@@ -8,6 +8,6 @@
     <fragment
         tools:layout="@layout/fragment_home"
         android:id="@+id/homeFragment"
-        android:name="com.demoapp.ua.home.presentation.HomeFragment"
+        android:name="com.company.nond.home.presentation.HomeFragment"
         android:label="HomeFragment" />
 </navigation>
