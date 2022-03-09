@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../Library/Android/sdk/platforms/android-32/data/res/drawable/ratingbar_indicator_material.xml" value="0.136" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19384057971014493" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1421875" />
+        <entry key="app/src/main/res/layout/fragment_item_details.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_home_page.xml" value="0.1421875" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.152" />
       </map>

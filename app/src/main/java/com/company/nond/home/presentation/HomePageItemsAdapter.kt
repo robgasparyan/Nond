@@ -8,10 +8,9 @@ import com.company.nond.databinding.ItemHomePageBinding
 import com.company.nond.home.domain.HomePageItemsUIModel
 import com.end.nond.extensions.loadImage
 
-class HomePageItemsAdapter:RecyclerView.Adapter<HomePageItemsAdapter.ViewHolder>() {
+class HomePageItemsAdapter(private val onItemClicked: ((itemName:String, itemPrice:String, imageUrl:String) -> Unit)):RecyclerView.Adapter<HomePageItemsAdapter.ViewHolder>() {
 
     private var data = mutableListOf<HomePageItemsUIModel>()
-    var onItemClicked: (() -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
@@ -26,13 +25,10 @@ class HomePageItemsAdapter:RecyclerView.Adapter<HomePageItemsAdapter.ViewHolder>
     inner class ViewHolder(private val binding: ItemHomePageBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        init {
-            binding.itemContainer.setOnClickListener {
-                onItemClicked?.invoke()
-            }
-        }
-
         fun bind(item: HomePageItemsUIModel) = with(binding) {
+            itemContainer.setOnClickListener {
+                onItemClicked.invoke(item.name, item.price, item.image_urls?.get(0)?:"")
+            }
             item.image_urls?.let {
                 itemImage.loadImage(it[0])
             }
