@@ -17,18 +17,16 @@ class HomeViewModel @Inject constructor(private val homeUseCase: HomeUseCase) : 
     private val _homePageDataList = MutableStateFlow<List<HomePageItemsUIModel>>(emptyList())
     val homePageDataList: StateFlow<List<HomePageItemsUIModel>> get() = _homePageDataList.asStateFlow()
 
-    fun loadHomePageData() {
-        viewModelScope.launch {
-            setIsLoadingValue(true)
-            when (val dataUiModel = homeUseCase.loadHomePageData()) {
-                is UIModel.Data -> {
-                    setHomePageData(dataUiModel.data)
-                    setIsLoadingValue(false)
-                }
-                is UIModel.Fail -> {
-                    setErrorMessage(dataUiModel.t.toString())
-                    setIsLoadingValue(false)
-                }
+    fun loadHomePageData() = viewModelScope.launch {
+        setIsLoadingValue(true)
+        when (val dataUiModel = homeUseCase.loadHomePageData()) {
+            is UIModel.Data -> {
+                setHomePageData(dataUiModel.data)
+                setIsLoadingValue(false)
+            }
+            is UIModel.Fail -> {
+                setErrorMessage(dataUiModel.t.message ?: "")
+                setIsLoadingValue(false)
             }
         }
     }
@@ -36,6 +34,5 @@ class HomeViewModel @Inject constructor(private val homeUseCase: HomeUseCase) : 
     private fun setHomePageData(data: List<HomePageItemsUIModel>) {
         _homePageDataList.value = data
     }
-
 
 }

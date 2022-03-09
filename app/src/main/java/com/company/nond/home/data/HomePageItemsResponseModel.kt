@@ -9,12 +9,12 @@ data class HomePageItemsResponseModel(
     )
 
     data class Result(
-        val created_at: String?,
-        val image_ids: List<String>?,
-        val image_urls: List<String>?,
-        val image_urls_thumbnails: List<String>?,
-        val name: String?,
-        val price: String?,
-        val uid: String?
+        val created_at: String? = null,
+        val image_ids: List<String>? = null,
+        val image_urls: List<String>? = null,
+        val image_urls_thumbnails: List<String>? = null,
+        val name: String? = null,
+        val price: String? = null,
+        val uid: String? = null
     )
 }

@@ -1,0 +1,54 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    compileSdk 32
+    resourcePrefix "testingmodule"
+
+    defaultConfig {
+        minSdk 21
+        targetSdk 32
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_11
+    }
+}
+
+dependencies {
+    // Only for tests
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation 'com.google.code.gson:gson:2.9.0'
+    api "com.squareup.okhttp3:okhttp:5.0.0-alpha.2"
+    api "com.squareup.okhttp3:mockwebserver:4.9.3"
+    api 'junit:junit:4.13.2'
+    api 'androidx.test:core:1.4.0'
+    api 'androidx.arch.core:core-testing:2.1.0'
+    api 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0'
+    api "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
+    api "androidx.test:runner:1.4.0"
+    api('org.threeten:threetenbp:1.5.2') {
+        exclude group: 'com.jakewharton.threetenabp', module: 'threetenabp'
+    }
+    api 'app.cash.turbine:turbine:0.7.0'
+    api "io.mockk:mockk:1.12.2"
+    api "io.mockk:mockk-agent-jvm:1.12.2"
+}
